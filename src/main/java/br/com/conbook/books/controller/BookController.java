@@ -17,25 +17,26 @@ import br.com.conbook.books.service.BookService;
 @Controller
 @RequestMapping("/books")
 public class BookController {
-	
+
 	private final BookService service;
-	
+
 	public BookController(BookService service) {
 		this.service = service;
 	}
-	
+
 	@GetMapping
-	public ResponseEntity<List<BookList>> findAll(@RequestParam(required = false) String author){
-		if(author != null) {
-			return service.findByAuthor(author);
+	public ResponseEntity<List<BookList>> findAll(@RequestParam(required = false) String author) {
+		if (author == null) {
+			return service.findAll();
+
 		}
-		
-		return service.findAll();
+
+		return service.findAllByAuthor(author);
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<BookDatas>> findOne(@PathVariable Long id){
+	public ResponseEntity<Optional<BookDatas>> findById(@PathVariable Long id) {
 		return service.findById(id);
 	}
-	
+
 }

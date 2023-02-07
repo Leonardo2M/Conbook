@@ -25,8 +25,12 @@ public class BookService {
 		return ResponseEntity.ok().body(books);
 	}
 
-	public ResponseEntity<List<BookList>> findByAuthor(String name) {
-		List<BookList> books = repository.findByAuthor(name).stream().map(BookList::new).toList();
+	public ResponseEntity<List<BookList>> findAllByAuthor(String name) {
+		List<BookList> books = repository.findAllByAuthor(name).stream().map(BookList::new).toList();
+		
+		if(books.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
 
 		return ResponseEntity.ok().body(books);
 	}
