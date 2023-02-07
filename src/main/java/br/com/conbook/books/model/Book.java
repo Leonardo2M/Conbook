@@ -15,7 +15,7 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String bookName;
+	private String name;
 	private String author;
 	private Long numbersOfPages;
 	private LocalDate dateOfEnd;
@@ -24,9 +24,9 @@ public class Book {
 
 	}
 
-	public Book(Long id, String bookName, String author, Long numbersOfPages, LocalDate dateOfEnd) {
+	public Book(Long id, String name, String author, Long numbersOfPages, LocalDate dateOfEnd) {
 		this.id = id;
-		this.bookName = bookName;
+		this.name = name;
 		this.author = author;
 		this.numbersOfPages = numbersOfPages;
 		this.dateOfEnd = dateOfEnd;
@@ -40,12 +40,12 @@ public class Book {
 		this.id = id;
 	}
 
-	public String getBookName() {
-		return bookName;
+	public String getName() {
+		return name;
 	}
 
-	public void setBookName(String bookName) {
-		this.bookName = bookName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getAuthor() {
@@ -74,7 +74,7 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", author=" + author + ", numbersOfPages=" + numbersOfPages + ", dateOfEnd=" + dateOfEnd
+		return "Book [id=" + id + ", name=" + name +", author=" + author + ", numbersOfPages=" + numbersOfPages + ", dateOfEnd=" + dateOfEnd
 				+ "]";
 	}
 
