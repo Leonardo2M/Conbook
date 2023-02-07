@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import br.com.conbook.books.model.Book;
+import br.com.conbook.books.model.dto.BookList;
 import br.com.conbook.books.repository.BookRepository;
 
 @Service
@@ -17,8 +17,8 @@ public class BookService {
 		this.repository = repository;
 	}
 	
-	public ResponseEntity<List<Book>> findAll(){
-		List<Book> books = repository.findAll();
+	public ResponseEntity<List<BookList>> findAll(){
+		List<BookList> books = repository.findAll().stream().map(BookList::new).toList();
 		
 		return ResponseEntity.ok().body(books);
 	}

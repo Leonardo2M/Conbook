@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.conbook.books.model.Book;
+import br.com.conbook.books.model.dto.BookList;
 import br.com.conbook.books.service.BookService;
 
 @Controller
@@ -21,7 +21,7 @@ public class BookController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<Book>> findAll(){
+	public ResponseEntity<List<BookList>> findAll(){
 		return service.findAll();
 	}
 	
