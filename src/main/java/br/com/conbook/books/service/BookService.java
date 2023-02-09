@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.conbook.books.model.Book;
 import br.com.conbook.books.model.dto.BookDatas;
 import br.com.conbook.books.model.dto.BookList;
+import br.com.conbook.books.model.dto.UpdateDataBook;
 import br.com.conbook.books.repository.BookRepository;
 
 @Service
@@ -59,6 +60,32 @@ public class BookService {
 		}
 
 		return ResponseEntity.notFound().build();
+	}
+	
+	// Update book for id (PUT)
+	public ResponseEntity<BookDatas> update(Long id, UpdateDataBook data){
+		Book book = repository.getReferenceById(id);
+		
+		if (book == null) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		book.updateData(data);
+		repository.save(book);
+		
+		return ResponseEntity.ok().body(new BookDatas(book));
+	}
+	
+	// Delete book for id (DELETE)
+	public ResponseEntity<?> delete(Long id) {
+		Book book = repository.getReferenceById(id);
+		
+		if (book == null) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		repository.deleteById(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }

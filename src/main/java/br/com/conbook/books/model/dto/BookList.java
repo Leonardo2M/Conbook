@@ -7,7 +7,7 @@ import br.com.conbook.books.model.Book;
 public record BookList(String name, String author, Long numberOfPages, LocalDateTime dateOfEnd) {
 
 	public BookList(Book book) {
-		this(book.getName() ,book.getAuthor(), book.getNumbersOfPages(), book.getDateOfEnd());
+		this(book.getName() ,book.getAuthor(), book.getNumberOfPages(), book.getDateOfEnd());
 	}
 
 }

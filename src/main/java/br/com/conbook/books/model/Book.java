@@ -2,6 +2,7 @@ package br.com.conbook.books.model;
 
 import java.time.LocalDateTime;
 
+import br.com.conbook.books.model.dto.UpdateDataBook;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,17 +18,17 @@ public class Book {
 	private Long id;
 	private String name;
 	private String author;
-	private Long numbersOfPages;
+	private Long numberOfPages;
 	private LocalDateTime dateOfEnd;
 
 	public Book() {
 
 	}
 
-	public Book(String name, String author, Long numbersOfPages, LocalDateTime dateOfEnd) {
+	public Book(String name, String author, Long numberOfPages, LocalDateTime dateOfEnd) {
 		this.name = name;
 		this.author = author;
-		this.numbersOfPages = numbersOfPages;
+		this.numberOfPages = numberOfPages;
 		this.dateOfEnd = dateOfEnd;
 	}
 
@@ -55,12 +56,12 @@ public class Book {
 		this.author = author;
 	}
 
-	public Long getNumbersOfPages() {
-		return numbersOfPages;
+	public Long getNumberOfPages() {
+		return numberOfPages;
 	}
 
-	public void setNumbersOfPages(Long numbersOfPages) {
-		this.numbersOfPages = numbersOfPages;
+	public void setNumberOfPages(Long numberOfPages) {
+		this.numberOfPages = numberOfPages;
 	}
 
 	public LocalDateTime getDateOfEnd() {
@@ -73,8 +74,28 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", name=" + name +", author=" + author + ", numbersOfPages=" + numbersOfPages + ", dateOfEnd=" + dateOfEnd
-				+ "]";
+		return "Book [id=" + id + ", name=" + name + ", author=" + author + ", numberOfPages=" + numberOfPages
+				+ ", dateOfEnd=" + dateOfEnd + "]";
+	}
+
+	public void updateData(UpdateDataBook data) {
+
+		if (data.name() != null) {
+			this.name = data.name();
+		}
+
+		if (data.author() != null) {
+			this.author = data.author();
+		}
+
+		if (data.dateOfEnd() != null) {
+			this.dateOfEnd = data.dateOfEnd();
+		}
+
+		if (data.numberOfPages() != null) {
+			this.numberOfPages = data.numberOfPages();
+		}
+
 	}
 
 }
