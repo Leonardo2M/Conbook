@@ -1,6 +1,6 @@
 package br.com.conbook.books.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,14 +18,13 @@ public class Book {
 	private String name;
 	private String author;
 	private Long numbersOfPages;
-	private LocalDate dateOfEnd;
+	private LocalDateTime dateOfEnd;
 
 	public Book() {
 
 	}
 
-	public Book(Long id, String name, String author, Long numbersOfPages, LocalDate dateOfEnd) {
-		this.id = id;
+	public Book(String name, String author, Long numbersOfPages, LocalDateTime dateOfEnd) {
 		this.name = name;
 		this.author = author;
 		this.numbersOfPages = numbersOfPages;
@@ -64,11 +63,11 @@ public class Book {
 		this.numbersOfPages = numbersOfPages;
 	}
 
-	public LocalDate getDateOfEnd() {
+	public LocalDateTime getDateOfEnd() {
 		return dateOfEnd;
 	}
 
-	public void setDateOfEnd(LocalDate dateOfEnd) {
+	public void setDateOfEnd(LocalDateTime dateOfEnd) {
 		this.dateOfEnd = dateOfEnd;
 	}
 
