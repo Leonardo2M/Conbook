@@ -3,6 +3,7 @@ package br.com.conbook.books.service;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.conbook.books.model.exception.BookNotFound;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -52,24 +53,16 @@ public class BookService {
 	
 	
 	// Find one entity by id (GET)
-	public ResponseEntity<Optional<BookDatas>> findById(Long id) {
-		Optional<BookDatas> book = repository.findById(id).map(BookDatas::new);
+	public ResponseEntity<BookDatas> findById(Long id) {
+		var book = repository.findById(id).orElseThrow(() -> new BookNotFound(id));
 
-		if (book.isPresent()) {
-			return ResponseEntity.ok().body(book);
-		}
-
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.ok().body(new BookDatas(book));
 	}
 	
 	// Update book for id (PUT)
 	public ResponseEntity<BookDatas> update(Long id, UpdateDataBook data){
-		Book book = repository.getReferenceById(id);
-		
-		if (book == null) {
-			return ResponseEntity.notFound().build();
-		}
-		
+		var book = repository.findById(id).orElseThrow(() -> new BookNotFound(id));
+
 		book.updateData(data);
 		repository.save(book);
 		
@@ -78,11 +71,7 @@ public class BookService {
 	
 	// Delete book for id (DELETE)
 	public ResponseEntity<?> delete(Long id) {
-		Book book = repository.getReferenceById(id);
-		
-		if (book == null) {
-			return ResponseEntity.notFound().build();
-		}
+		var book = repository.findById(id).orElseThrow(() -> new BookNotFound(id));
 		
 		repository.deleteById(id);
 		return ResponseEntity.noContent().build();

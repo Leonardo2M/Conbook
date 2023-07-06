@@ -53,7 +53,7 @@ public class BookController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<BookDatas>> findById(@PathVariable Long id) {
+	public ResponseEntity<BookDatas> findById(@PathVariable Long id) {
 		return service.findById(id);
 	}
 	
