@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import br.com.conbook.books.model.exception.BookNotFound;
+import br.com.conbook.books.model.exception.NoBookFound;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -37,15 +38,20 @@ public class BookService {
 	public ResponseEntity<List<BookList>> findAll() {
 		List<BookList> books = repository.findAll().stream().map(BookList::new).toList();
 
+		if(books.isEmpty()) {
+			throw new NoBookFound("There is no registered book!");
+		}
+
+
 		return ResponseEntity.ok().body(books);
 	}
 
 	// Read all entity by author (GET)
 	public ResponseEntity<List<BookList>> findAllByAuthor(String name) {
 		List<BookList> books = repository.findAllByAuthor(name).stream().map(BookList::new).toList();
-		
+
 		if(books.isEmpty()) {
-			return ResponseEntity.notFound().build();
+			throw new NoBookFound("there is no book by this author!");
 		}
 
 		return ResponseEntity.ok().body(books);
